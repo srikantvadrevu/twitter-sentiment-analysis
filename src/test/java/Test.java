@@ -1,3 +1,4 @@
+import com.ignitealpha.twitter.sentiment.analysis.KafkaProducerConnector;
 import com.ignitealpha.twitter.sentiment.analysis.TwitterConnector;
 
 import java.util.ArrayList;
@@ -13,13 +14,19 @@ public class Test {
 
         for (int msgRead = 0; msgRead < 10; msgRead++) {
             try {
-                System.out.println(
-                        queue.take()
-                );
+                System.out.println(queue.take());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         twitterConnector.stop();
+    }
+
+    private void kafkaConnector() {
+        KafkaProducerConnector producerConnector = new KafkaProducerConnector();
+        producerConnector.connect();
+        producerConnector.send("test twitter2");
+        producerConnector.send("test twitter3");
+        producerConnector.closeConnection();
     }
 }

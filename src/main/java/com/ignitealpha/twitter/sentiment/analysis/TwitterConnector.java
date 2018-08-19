@@ -21,7 +21,7 @@ public class TwitterConnector {
     public TwitterConnector() {
         connectionUtils = new TwitterConnectionUtils();
         queue = new LinkedBlockingQueue<String>(100);
-        trackingTerms = new ArrayList<>();
+        trackingTerms = new ArrayList<String>();
         statusesFilterEndpoint = new StatusesFilterEndpoint();
         statusesFilterEndpoint.trackTerms(trackingTerms);
     }
