@@ -10,7 +10,7 @@ import java.util.Properties;
 public class KafkaProducerConnector {
     private KafkaProducer producer;
     private static final String TOPIC_NAME = "twitter-sentiment-analysis";
-    private String url = "18.218.28.74:9092";
+    private String url = "localhost:9092";
 
     public KafkaProducerConnector() {
     }

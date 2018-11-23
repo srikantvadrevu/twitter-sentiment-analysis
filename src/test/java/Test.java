@@ -6,7 +6,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class Test {
     public static void main(String[] args) {
-        ArrayList<String> arrayList = new ArrayList<String>();
+        /*ArrayList<String> arrayList = new ArrayList<String>();
         arrayList.add("iphone");
         TwitterConnector twitterConnector = new TwitterConnector(10, arrayList);
         twitterConnector.connect();
@@ -19,10 +19,12 @@ public class Test {
                 e.printStackTrace();
             }
         }
-        twitterConnector.stop();
+        twitterConnector.stop();*/
+
+        kafkaConnector();
     }
 
-    private void kafkaConnector() {
+    private static void kafkaConnector() {
         KafkaProducerConnector producerConnector = new KafkaProducerConnector();
         producerConnector.connect();
         producerConnector.send("test twitter2");
