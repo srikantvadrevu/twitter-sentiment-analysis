@@ -12,6 +12,9 @@ import json
 
 app = Flask(__name__)
 
+# Graph labels
+labels = 'Positive', 'Negative', 'Neutral', 'Unable to Determine'
+
 # Removes the links and special characters from the provided tweet.
 def clean_tweet(tweet):
     return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
@@ -28,17 +31,17 @@ def get_sentiment(polarity, values):
     if polarity < 0:
         if polarity < -0.4:
             values[1] = values[1] + 1
-            return 'Negative'
+            return labels[1]
         values[3] = values[3] + 1
-        return 'Not Sure'
+        return labels[3]
     if polarity == 0.0:
         values[2] = values[2] + 1
-        return 'Neutral'
+        return labels[2]
     if polarity < 0.4:
         values[3] = values[3] + 1
-        return 'Not Sure'
+        return labels[3]
     values[0] = values[0] + 1
-    return 'Positive'
+    return labels[1]
 
 # Initializing the kafka consumer.
 consumer = KafkaConsumer(
@@ -58,8 +61,7 @@ def index():
 
     response = []
     
-    # Graph labels and initializing the values to be plotted
-    labels = 'Positive', 'Negative', 'Neutral', 'Not Sure'
+    # initializing the values to be plotted
     values = [0, 0, 0, 0]
     explode = (0, 0, 0, 0)
 
